@@ -10,9 +10,8 @@ public class Projectile {
     public static final int SIZE = 10;
     public static final int SPEED = 2;
 
-    private final double dx;
-    private final double dy;
-
+    private double dx;
+    private double dy;
     private double xcoord;
     private double ycoord;
 
@@ -73,5 +72,27 @@ public class Projectile {
     public void move() {
         ycoord += dy;
         xcoord += dx;
+
+        handleBoundary();
+    }
+
+    //(based from PaddleBall)
+    // Constrains projectile so that it bounces off top and vertical walls
+    // MODIFIES: this
+    // EFFECTS: projectile is constrained to bounce off top and vertical walls
+    private void handleBoundary() {
+        if (getX() - SIZE / 2 < 0) {
+            xcoord = SIZE / 2;
+            dx *= -1;
+        } else if (getX() + SIZE / 2 > 800) {
+            xcoord = 800 - SIZE / 2;
+            dx *= -1;
+        } else if (getY() - SIZE / 2 < 0) {
+            ycoord = SIZE / 2;
+            dy *= -1;
+        } else if (getY() + SIZE / 2 > 800) {
+            ycoord = SIZE / 2;
+            dy *= -1;
+        }
     }
 }
