@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class HighScores {
@@ -20,5 +19,12 @@ public class HighScores {
         return highscores;
     }
 
-
+    public List<String> getTopHighScores() {
+        List<String> topHighScores = new ArrayList<>();
+        highscores.sort(Comparator.comparingInt(ScoreCard::getScore).reversed());
+        for (ScoreCard scoreCard : highscores) {
+            topHighScores.add(scoreCard.getScoreCardString());
+        }
+        return topHighScores;
+    }
 }
