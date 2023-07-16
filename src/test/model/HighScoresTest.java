@@ -22,7 +22,8 @@ class HighScoresTest {
         testHighScores.addScore(2, "4");
         testHighScores.addScore(10, "6");
         testHighScores.addScore(1, "5");
-
         assertEquals("10 6",testHighScores.getTopHighScores().get(0));
+        assertEquals("7 3",testHighScores.getTopHighScores().get(1));
+
     }
 }
