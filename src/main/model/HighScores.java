@@ -2,28 +2,44 @@ package model;
 
 import java.util.*;
 
-
+/*
+ * Represents an arbitrary number of ScoreEntry
+ */
 public class HighScores {
-    private List<ScoreCard> highscores;
+    private List<ScoreEntry> highscores;
+    private int gamesplayed;
 
+    // Constructs a new game
+    // EFFECTS:  create empty list of ScoreEntry and gamesplayed set to 0
     public HighScores() {
-        highscores = new ArrayList<>();
+        this.highscores = new ArrayList<>();
+        this.gamesplayed = 0;
     }
 
-    public void addScore(int score, String time) {
-        ScoreCard scoreCard = new ScoreCard(score, time);
-        highscores.add(scoreCard);
-    }
-
-    public List<ScoreCard> getHighScores() {
+    public List<ScoreEntry> getHighScores() {
         return highscores;
     }
 
+    public int getGamesplayed() {
+        return gamesplayed;
+    }
+
+    // Add new ScoreEntry to HighScores
+    // MODIFIES: this
+    // EFFECTS: create new ScoreEntry and add to HighScores and add 1 to games played
+    public void addScore(int score, String time) {
+        ScoreEntry scoreEntry = new ScoreEntry(score, time);
+        highscores.add(scoreEntry);
+        gamesplayed += 1;
+    }
+
+    // Sort HighScores by Score
+    // EFFECTS: return List of Strings of ScoreEntry sorted in descending order by score
     public List<String> getTopHighScores() {
         List<String> topHighScores = new ArrayList<>();
-        highscores.sort(Comparator.comparingInt(ScoreCard::getScore).reversed());
-        for (ScoreCard scoreCard : highscores) {
-            topHighScores.add(scoreCard.getScoreCardString());
+        highscores.sort(Comparator.comparingInt(ScoreEntry::getScore).reversed());
+        for (ScoreEntry scoreEntry : highscores) {
+            topHighScores.add(scoreEntry.getScoreEntryString());
         }
         return topHighScores;
     }

@@ -3,13 +3,13 @@ package model;
 /*
  * Represents a single score entry with score and time
  */
-public class ScoreCard {
-
+public class ScoreEntry {
     private int score;
     private String time;
 
-
-    public ScoreCard(int score, String time) {
+    // Constructor a score entry
+    // EFFECTS: create score entry with given time and score
+    public ScoreEntry(int score, String time) {
         this.time = time;
         this.score = score;
     }
@@ -22,7 +22,9 @@ public class ScoreCard {
         return time;
     }
 
-    public String getScoreCardString() {
+    // Return score entry as string
+    // EFFECTS: return given score entry as "score time"
+    public String getScoreEntryString() {
         return score + " " + time;
     }
 }

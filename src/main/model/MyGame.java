@@ -10,8 +10,8 @@ import java.util.Random;
  * Represents a new game. (based from Space Invader)
  */
 public class MyGame {
-    public static final int WIDTH = 80;
-    public static final int HEIGHT = 80;
+    public static final int WIDTH = 39;
+    public static final int HEIGHT = 22;
     public static final Random RND = new Random();
 
     private HighScores highScores;
@@ -21,10 +21,10 @@ public class MyGame {
     private int gameScore;
 
     // Constructs a new game
-    // EFFECTS:  create empty list of projectiles, centres player on screen
+    // EFFECTS:  create empty list of projectiles and empty list of high scores, centres player on screen
     public MyGame() {
-        projectiles = new ArrayList<Projectile>();
-        highScores = new HighScores();
+        this.projectiles = new ArrayList<>();
+        this.highScores = new HighScores();
         set();
     }
 
@@ -32,13 +32,7 @@ public class MyGame {
         return highScores.getTopHighScores();
     }
 
-    public String getHighScore() {
-        if (highScores.getTopHighScores().isEmpty()) {
-            return "No High Score Yet";
-        } else {
-            return highScores.getTopHighScores().get(0);
-        }
-    }
+
 
     public boolean getGameStatus() {
         return isGameOver;
@@ -57,12 +51,22 @@ public class MyGame {
     }
 
 
+    // Retrieves the highest score entry so far
+    // EFFECTS: return the highest score entry in high scores as string
+    public String getHighScore() {
+        if (highScores.getGamesplayed() == 0) {
+            return "No High Score Yet";
+        } else {
+            return highScores.getTopHighScores().get(0);
+        }
+    }
+
     // Sets / resets the game
     // MODIFIES: this
     // EFFECTS:  clears list of projectiles, initializes player, game status, and score
     public void set() {
         projectiles.clear();
-        player = new Player(5, 5);
+        player = new Player(19, 11);
         isGameOver = false;
         gameScore = 0;
     }
@@ -77,57 +81,55 @@ public class MyGame {
     }
 
     // Updates projectiles
-    // MODIFIES: This
-    // EFFECTS: Moves the projectiles, removes ones off-screen, update score
+    // MODIFIES: this
+    // EFFECTS: moves the projectiles, removes ones off-screen, update score
     private void updateProjectiles() {
-        List<Projectile> projectilesOut = new ArrayList<>();
-
-        for (Projectile next : projectiles) {
-            next.move();
-            if (next.getY() < 0 || next.getY() > HEIGHT
-                    || next.getX() < 0 || next.getX() > WIDTH) {
-                projectilesOut.add(next);
+        for (Projectile projectile : projectiles) {
+            projectile.move();
+            if (projectile.getY() < 0 || projectile.getY() > HEIGHT
+                    || projectile.getX() < 0 || projectile.getX() > WIDTH) {
+                projectiles.remove(projectile);
                 gameScore++;
+                return;
             }
         }
-        projectiles.removeAll(projectilesOut);
     }
 
-    // Creates a new projectile
-    // MODIFIES: This
-    // EFFECTS: Adds a new projectile to the list
+    // Creates a new projectile (based from Space Invader)
+    // MODIFIES: this
+    // EFFECTS: adds a new projectile to the list
     public void createNewProjectile() {
-        if (RND.nextInt(80) < 1) {
+        if (RND.nextInt(50) < 1) {
             Projectile projectile = new Projectile(player.getX(), player.getY());
             projectiles.add(projectile);
         }
     }
 
     // Checks for collisions between player and projectile
-    // modifies: this
-    // effects:  ends game if collision occurs
+    // MODIFIES: this
+    // EFFECTS:  ends game and add score to high scores if collision occurs
     private void checkGameOver() {
-        for (Projectile target : projectiles) {
-            if (player.checkHit(target)) {
+        for (Projectile projectile : projectiles) {
+            if (player.checkHit(projectile)) {
                 isGameOver = true;
+                projectiles.clear();
+                highScores.addScore(gameScore, currentTime());
+                return;
             }
-        }
-
-        if (isGameOver) {
-            projectiles.clear();
-            highScores.addScore(gameScore, currentTime());
         }
     }
 
+    // Return current date and time
+    // EFFECTS: return current date and time as string
     private String currentTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return formatter.format(now);
     }
 
-    // Responds to keyboard inputs
+    // Responds to inputs
     // MODIFIES: this
-    // EFFECTS:  moves player
+    // EFFECTS:  moves player based on input
     public void movePlayer(char character) {
         if (character == 'a') {
             player.moveLeft();
@@ -137,8 +139,6 @@ public class MyGame {
             player.moveUp();
         } else if (character == 's') {
             player.moveDown();
-        } else if (character == 'r' && getGameStatus()) {
-            set();
         }
     }
 }
