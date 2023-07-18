@@ -53,6 +53,10 @@ public class MyGameTest {
         assertEquals(MyGame.HEIGHT /2, testMyGame.getPlayer().getY());
         testMyGame.movePlayer('q');
         assertEquals(MyGame.HEIGHT /2, testMyGame.getPlayer().getY());
+    }
 
+    @Test
+    void testGetHighScore() {
+        assertEquals("No High Score Yet",testMyGame.getHighScore());
     }
 }

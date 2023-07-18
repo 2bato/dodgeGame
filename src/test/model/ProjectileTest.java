@@ -22,6 +22,12 @@ class ProjectileTest {
     void testRandomCoords() {
         double[] coords = testProjectile.randomCoords();
         assertTrue(coords[0] == 0 || coords[0] == MyGame.WIDTH || coords[1] == 0 || coords[1] == MyGame.HEIGHT);
+        double[] coords1 = testProjectile.randomCoords();
+        assertTrue(coords1[0] == 0 || coords1[0] == MyGame.WIDTH || coords1[1] == 0 || coords1[1] == MyGame.HEIGHT);
+        double[] coords2 = testProjectile.randomCoords();
+        assertTrue(coords2[0] == 0 || coords2[0] == MyGame.WIDTH || coords2[1] == 0 || coords2[1] == MyGame.HEIGHT);
+        double[] coords3 = testProjectile.randomCoords();
+        assertTrue(coords3[0] == 0 || coords3[0] == MyGame.WIDTH || coords3[1] == 0 || coords3[1] == MyGame.HEIGHT);
     }
 
     @Test
