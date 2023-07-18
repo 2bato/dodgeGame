@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /*
  * Unit tests for the Player class.
@@ -101,8 +101,15 @@ class PlayerTest {
     @Test
     void testCheckHit() {
         Projectile p = new Projectile(1,2);
-        p.makeDummyProjectile(0,0);
-
-
+        p.makeDummyProjectile(5,5);
+        assertTrue(testPlayer.checkHit(p));
+        p.makeDummyProjectile(10,10);
+        assertFalse(testPlayer.checkHit(p));
+        p.makeDummyProjectile(6,6);
+        assertFalse(testPlayer.checkHit(p));
+        p.makeDummyProjectile(4,6);
+        assertFalse(testPlayer.checkHit(p));
+        p.makeDummyProjectile(4,4);
+        assertTrue(testPlayer.checkHit(p));
     }
 }

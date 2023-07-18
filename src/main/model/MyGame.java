@@ -66,7 +66,7 @@ public class MyGame {
     // EFFECTS:  clears list of projectiles, initializes player, game status, and score
     public void set() {
         projectiles.clear();
-        player = new Player(19, 11);
+        player = new Player(WIDTH / 2, HEIGHT / 2);
         isGameOver = false;
         gameScore = 0;
     }
