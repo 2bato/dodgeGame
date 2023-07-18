@@ -15,6 +15,12 @@ class HighScoresTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals(0, testHighScores.getHighScores().size());
+        assertEquals(0, testHighScores.getGamesPlayed());
+    }
+
+    @Test
     void testGetTopHighScores() {
         testHighScores.addScore(5, "1");
         testHighScores.addScore(3, "2");

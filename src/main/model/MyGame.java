@@ -98,7 +98,7 @@ public class MyGame {
     // Creates a new projectile (based from Space Invader)
     // MODIFIES: this
     // EFFECTS: adds a new projectile to the list
-    public void createNewProjectile() {
+    private void createNewProjectile() {
         if (RND.nextInt(50) < 1) {
             Projectile projectile = new Projectile(player.getX(), player.getY());
             projectiles.add(projectile);
@@ -121,7 +121,7 @@ public class MyGame {
 
     // Return current date and time
     // EFFECTS: return current date and time as string
-    private String currentTime() {
+    String currentTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return formatter.format(now);
