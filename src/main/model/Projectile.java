@@ -28,9 +28,9 @@ public class Projectile {
         this.dy = (ydiff / hypotenuse) * SPEED;
     }
 
-    public void makeDummyProjectile(int x, int y) {
-        this.dx = 0;
-        this.dy = 0;
+    public void makeDummyProjectile(int x, int y, int dx, int dy) {
+        this.dx = dx;
+        this.dy = dy;
         this.xcoord = x;
         this.ycoord = y;
     }
@@ -50,7 +50,6 @@ public class Projectile {
     public double getDy() {
         return dy;
     }
-
 
 
     // Generate a random coordinate at the edges of the screen.

@@ -20,7 +20,7 @@ public class HighScores {
         return highscores;
     }
 
-    public int getGamesplayed() {
+    public int getGamesPlayed() {
         return gamesplayed;
     }
 

@@ -23,4 +23,10 @@ public class MyGameTest {
         assertFalse(testMyGame.getGameStatus());
         assertEquals(0, testMyGame.getGameScore());
     }
+
+    @Test
+    void testUpdate() {
+        testMyGame.update();
+        assertFalse(testMyGame.getGameStatus());
+    }
 }

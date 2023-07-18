@@ -101,15 +101,15 @@ class PlayerTest {
     @Test
     void testCheckHit() {
         Projectile p = new Projectile(1,2);
-        p.makeDummyProjectile(5,5);
+        p.makeDummyProjectile(5,5,0,0);
         assertTrue(testPlayer.checkHit(p));
-        p.makeDummyProjectile(10,10);
+        p.makeDummyProjectile(10,10,0,0);
         assertFalse(testPlayer.checkHit(p));
-        p.makeDummyProjectile(6,6);
+        p.makeDummyProjectile(6,6,0,0);
         assertFalse(testPlayer.checkHit(p));
-        p.makeDummyProjectile(4,6);
+        p.makeDummyProjectile(4,6,0,0);
         assertFalse(testPlayer.checkHit(p));
-        p.makeDummyProjectile(4,4);
+        p.makeDummyProjectile(4,4,0,0);
         assertTrue(testPlayer.checkHit(p));
     }
 }
