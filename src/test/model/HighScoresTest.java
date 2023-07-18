@@ -46,7 +46,8 @@ class HighScoresTest {
     @Test
     void testAddScore() {
         testHighScores.addScore(5, "1");
-        assertEquals(testHighScores.getHighScores().get(0),testHighScores.getHighScores().get(0));
+        assertEquals(5,testHighScores.getHighScores().get(0).getScore());
+        assertEquals("1",testHighScores.getHighScores().get(0).getTime());
     }
 
 }
