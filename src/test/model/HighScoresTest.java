@@ -10,12 +10,12 @@ class HighScoresTest {
     private HighScores testHighScores;
 
     @BeforeEach
-    public void runBefore() {
+    void runBefore() {
         testHighScores = new HighScores();
     }
 
     @Test
-    public void testGetTopHighScores() {
+    void testGetTopHighScores() {
         testHighScores.addScore(5, "1");
         testHighScores.addScore(3, "2");
         testHighScores.addScore(7, "3");
@@ -24,6 +24,11 @@ class HighScoresTest {
         testHighScores.addScore(1, "5");
         assertEquals("10 6",testHighScores.getTopHighScores().get(0));
         assertEquals("7 3",testHighScores.getTopHighScores().get(1));
+    }
 
+    @Test
+    void testAddScore() {
+        testHighScores.addScore(5, "1");
+        assertEquals(testHighScores.getHighScores().get(0),testHighScores.getHighScores().get(0));
     }
 }

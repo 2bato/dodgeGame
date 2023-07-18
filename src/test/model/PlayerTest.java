@@ -10,11 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class PlayerTest {
     private Player testPlayer;
+    private Player testPlayerTopl;
+    private Player testPlayerTopr;
+    private Player testPlayerBotl;
+    private Player testPlayerBotr;
 
 
     @BeforeEach
     void runBefore() {
         testPlayer = new Player(5, 5);
+        testPlayerTopl = new Player(1 , 1);
+        testPlayerTopr = new Player(MyGame.WIDTH - 1 , 1);
+        testPlayerBotl = new Player(1 , MyGame.HEIGHT - 1);
+        testPlayerBotr = new Player(MyGame.WIDTH - 1 , MyGame.HEIGHT - 1);
     }
 
     @Test
@@ -41,13 +49,60 @@ class PlayerTest {
     void testMoveUp() {
         testPlayer.moveUp();
         assertEquals(5, testPlayer.getX());
-        assertEquals(6, testPlayer.getY());
+        assertEquals(4, testPlayer.getY());
     }
 
     @Test
     void testMoveDown() {
         testPlayer.moveDown();
         assertEquals(5, testPlayer.getX());
-        assertEquals(4, testPlayer.getY());
+        assertEquals(6, testPlayer.getY());
+    }
+
+    @Test
+    void testHandleBoundary() {
+        testPlayerTopl.moveLeft();
+        testPlayerTopl.moveUp();
+        assertEquals(0, testPlayerTopl.getY());
+        assertEquals(0, testPlayerTopl.getX());
+        testPlayerTopl.moveLeft();
+        testPlayerTopl.moveUp();
+        assertEquals(0, testPlayerTopl.getY());
+        assertEquals(0, testPlayerTopl.getX());
+
+        testPlayerTopr.moveRight();
+        testPlayerTopr.moveUp();
+        assertEquals(0, testPlayerTopr.getY());
+        assertEquals(MyGame.WIDTH, testPlayerTopr.getX());
+        testPlayerTopr.moveRight();
+        testPlayerTopr.moveUp();
+        assertEquals(0, testPlayerTopr.getY());
+        assertEquals(MyGame.WIDTH, testPlayerTopr.getX());
+
+        testPlayerBotl.moveLeft();
+        testPlayerBotl.moveDown();
+        assertEquals(MyGame.HEIGHT, testPlayerBotl.getY());
+        assertEquals(0, testPlayerBotl.getX());
+        testPlayerBotl.moveLeft();
+        testPlayerBotl.moveDown();
+        assertEquals(MyGame.HEIGHT, testPlayerBotl.getY());
+        assertEquals(0, testPlayerBotl.getX());
+
+        testPlayerBotr.moveRight();
+        testPlayerBotr.moveDown();
+        assertEquals(MyGame.HEIGHT, testPlayerBotr.getY());
+        assertEquals(MyGame.WIDTH, testPlayerBotr.getX());
+        testPlayerBotr.moveRight();
+        testPlayerBotr.moveDown();
+        assertEquals(MyGame.HEIGHT, testPlayerBotr.getY());
+        assertEquals(MyGame.WIDTH, testPlayerBotr.getX());
+    }
+
+    @Test
+    void testCheckHit() {
+        Projectile p = new Projectile(1,2);
+        p.makeDummyProjectile(0,0);
+
+
     }
 }
