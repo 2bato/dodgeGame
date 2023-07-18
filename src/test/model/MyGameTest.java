@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MyGameTest {
     private MyGame testMyGame;
@@ -39,6 +38,20 @@ public class MyGameTest {
         testMyGame.update();
         assertEquals(1, testMyGame.getGameScore());
         assertEquals(0, testMyGame.getProjectiles().size());
+        testMyGame.addDummyProjectile(MyGame.WIDTH/2,MyGame.HEIGHT/2,0,0);
+        testMyGame.update();
+        assertTrue(testMyGame.getGameStatus());
+        assertEquals(0, testMyGame.getProjectiles().size());
+        assertEquals(1, testMyGame.getHighScores().size());
+    }
+
+    @Test
+    void testCreateProjectile() {
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        assertTrue(testMyGame.getProjectiles().size() <= 4);
     }
 
     @Test

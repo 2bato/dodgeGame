@@ -89,7 +89,7 @@ public class MyGame {
     // Creates a new projectile (based from Space Invader)
     // MODIFIES: this
     // EFFECTS: adds a new projectile to the list
-    private void createNewProjectile() {
+    public void createNewProjectile() {
         if (RND.nextInt(50) < 1) {
             Projectile projectile = new Projectile(player.getX(), player.getY());
             projectiles.add(projectile);
