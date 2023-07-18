@@ -104,17 +104,17 @@ public class ConsoleApp {
     private void drawPlayer() {
         Player player = game.getPlayer();
 
-        drawPosition(player.getX(), player.getY(), TextColor.ANSI.GREEN, '\u2588', true);
+        drawPosition(player.getX(), player.getY(), TextColor.ANSI.GREEN, "█", true);
     }
 
     private void drawProjectiles() {
         for (Projectile projectile : game.getProjectiles()) {
-            drawPosition((int) projectile.getX(), (int) projectile.getY(), TextColor.ANSI.RED, '\u2B24', false);
+            drawPosition((int) projectile.getX(), (int) projectile.getY(), TextColor.ANSI.RED, "⬤", false);
         }
     }
 
 
-    private void drawPosition(int x, int y, TextColor color, char c, boolean wide) {
+    private void drawPosition(int x, int y, TextColor color, String c, boolean wide) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
         text.putString(x * 2, y + 1, String.valueOf(c));
