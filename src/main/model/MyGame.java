@@ -68,7 +68,7 @@ public class MyGame {
     // EFFECTS:  updates player and projectiles
     public void update() {
         updateProjectiles();
-        createNewProjectile(2);
+        createNewProjectile();
         checkGameOver();
     }
 
@@ -89,8 +89,8 @@ public class MyGame {
     // Creates a new projectile (based from Space Invader)
     // MODIFIES: this
     // EFFECTS: adds a new projectile to the list
-    public void createNewProjectile(int setseed) {
-        if ((RND.nextInt(50) < 1 || setseed == 1) && setseed != 0) {
+    public void createNewProjectile() {
+        if (RND.nextInt(30) > 1) {
             Projectile projectile = new Projectile(player.getX(), player.getY());
             projectiles.add(projectile);
         }
