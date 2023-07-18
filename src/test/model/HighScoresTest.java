@@ -33,8 +33,20 @@ class HighScoresTest {
     }
 
     @Test
+    void testGetHighScore() {
+        assertEquals("No High Score Yet",testHighScores.getHighScore());
+        testHighScores.addScore(5, "1");
+        assertEquals("5 1",testHighScores.getHighScore());
+        testHighScores.addScore(20, "1");
+        assertEquals("20 1",testHighScores.getHighScore());
+        testHighScores.addScore(18, "1");
+        assertEquals("20 1",testHighScores.getHighScore());
+    }
+
+    @Test
     void testAddScore() {
         testHighScores.addScore(5, "1");
         assertEquals(testHighScores.getHighScores().get(0),testHighScores.getHighScores().get(0));
     }
+
 }

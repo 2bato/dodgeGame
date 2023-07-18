@@ -32,7 +32,9 @@ public class MyGame {
         return highScores.getTopHighScores();
     }
 
-
+    public String getHighScore() {
+        return highScores.getHighScore();
+    }
 
     public boolean getGameStatus() {
         return isGameOver;
@@ -50,16 +52,6 @@ public class MyGame {
         return gameScore;
     }
 
-
-    // Retrieves the highest score entry so far
-    // EFFECTS: return the highest score entry in high scores as string
-    public String getHighScore() {
-        if (highScores.getGamesPlayed() == 0) {
-            return "No High Score Yet";
-        } else {
-            return highScores.getTopHighScores().get(0);
-        }
-    }
 
     // Sets / resets the game
     // MODIFIES: this

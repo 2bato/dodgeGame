@@ -43,4 +43,14 @@ public class HighScores {
         }
         return topHighScores;
     }
+
+    // Retrieves the highest score entry so far
+    // EFFECTS: return the highest score entry in high scores as string
+    public String getHighScore() {
+        if (getGamesPlayed() == 0) {
+            return "No High Score Yet";
+        } else {
+            return getTopHighScores().get(0);
+        }
+    }
 }

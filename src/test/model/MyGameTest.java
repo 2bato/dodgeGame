@@ -33,11 +33,6 @@ public class MyGameTest {
         assertFalse(testMyGame.getGameStatus());
     }
 
-    @Test
-    void testGetHighScore() {
-        assertEquals("No High Score Yet", testMyGame.getHighScore());
-        testMyGame.getHighScores().add("10 2023");
-    }
 
     @Test
     void testCurrentTime() {
