@@ -86,8 +86,7 @@ public class MyGame {
     private void updateProjectiles() {
         for (Projectile projectile : projectiles) {
             projectile.move();
-            if (projectile.getY() < 0 || projectile.getY() > HEIGHT
-                    || projectile.getX() < 0 || projectile.getX() > WIDTH) {
+            if (projectile.handleBoundary()) {
                 projectiles.remove(projectile);
                 gameScore++;
                 return;

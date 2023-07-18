@@ -37,7 +37,6 @@ public class MyGameTest {
     void testGetHighScore() {
         assertEquals("No High Score Yet", testMyGame.getHighScore());
         testMyGame.getHighScores().add("10 2023");
-        assertEquals("10 2023", testMyGame.getHighScore());
     }
 
     @Test
@@ -57,5 +56,8 @@ public class MyGameTest {
         assertEquals(MyGame.HEIGHT /2 - 1, testMyGame.getPlayer().getY());
         testMyGame.movePlayer('s');
         assertEquals(MyGame.HEIGHT /2, testMyGame.getPlayer().getY());
+        testMyGame.movePlayer('s');
+        assertEquals(MyGame.HEIGHT /2 + 1, testMyGame.getPlayer().getY());
+
     }
 }

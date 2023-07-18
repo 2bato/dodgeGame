@@ -82,4 +82,10 @@ public class Projectile {
         ycoord += dy;
         xcoord += dx;
     }
+
+    // Check if projectile is out of bounds
+    // EFFECTS: return true if projectile is out of bounds and false otherwise
+    public Boolean handleBoundary() {
+        return getY() < 0 || getY() > MyGame.HEIGHT || getX() < 0 || getX() > MyGame.WIDTH;
+    }
 }
