@@ -34,6 +34,8 @@ public class ConsoleApp {
         beginTicks();
     }
 
+
+
     // Begins the game cycle
     // EFFECTS: ticks every 30 ticks until game ends or window is closed
     private void beginTicks() throws IOException, InterruptedException {
@@ -43,6 +45,9 @@ public class ConsoleApp {
         }
     }
 
+    // Moves game forward by a tick
+    // MODIFIES: this
+    // EFFECTS: update game, clear screen, and re-render screen
     private void tick() throws IOException {
         handleUserInput();
         game.update();
@@ -51,17 +56,25 @@ public class ConsoleApp {
         screen.refresh();
     }
 
+    // Pass user input to game
+    // MODIFIES: this
+    // EFFECTS: moves player according to input or end game
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
-
         if (stroke == null) {
             return;
         }
-        if (stroke.getCharacter() != null) {
+        if (stroke.getCharacter() != null && stroke.getCharacter() != 'k') {
             game.movePlayer(stroke.getCharacter());
+        } else if (stroke.getCharacter() == 'k') {
+            printScores();
+            System.exit(10);
         }
     }
 
+    // Draws game or end screen on the screen
+    // MODIFIES: this
+    // EFFECTS: draws score, player, projectiles or end screen.
     private void render() {
         if (game.getGameStatus()) {
             if (endGui == null) {
@@ -74,6 +87,9 @@ public class ConsoleApp {
         drawProjectiles();
     }
 
+    // Draws end screen on the screen
+    // MODIFIES: this
+    // EFFECTS: draws end screen.
     private void drawEndScreen() {
         endGui = new MultiWindowTextGUI(screen);
 
@@ -81,16 +97,19 @@ public class ConsoleApp {
                 .setTitle("Game over!")
                 .setText("You finished with a score of " + game.getGameScore() + "! " + "High Score: "
                         + game.getHighScore())
-                .addButton(MessageDialogButton.Close);
+                .addButton(MessageDialogButton.Retry);
 
         MessageDialogButton button = dialogBuilder.build().showDialog(endGui);
 
-        if (button == MessageDialogButton.Close) {
+        if (button == MessageDialogButton.Retry) {
             game.set();
             endGui = null;
         }
     }
 
+    // Draws score
+    // MODIFIES: this
+    // EFFECTS: draws score on the screen.
     private void drawScore() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.GREEN);
@@ -101,6 +120,9 @@ public class ConsoleApp {
         text.putString(8, 0, String.valueOf(game.getGameScore()));
     }
 
+    // Draws player
+    // MODIFIES: this
+    // EFFECTS: draws player on the screen.
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"})
     private void drawPlayer() {
         Player player = game.getPlayer();
@@ -108,6 +130,9 @@ public class ConsoleApp {
         drawPosition(player.getX(), player.getY(), TextColor.ANSI.GREEN, '\u2588', true);
     }
 
+    // Draws projectiles
+    // MODIFIES: this
+    // EFFECTS: draws projectiles on the screen.
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"})
     private void drawProjectiles() {
         for (Projectile projectile : game.getProjectiles()) {
@@ -115,14 +140,24 @@ public class ConsoleApp {
         }
     }
 
-
+    // Draws assets
+    // MODIFIES: this
+    // EFFECTS: draws assets on the screen.
     private void drawPosition(int x, int y, TextColor color, char c, boolean wide) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
         text.putString(x * 2, y + 1, String.valueOf(c));
-
         if (wide) {
             text.putString(x * 2 + 1, y + 1, String.valueOf(c));
+        }
+    }
+
+    // Prints high scores
+    // EFFECTS: print out list of high scores
+    private void printScores() {
+        System.out.println("High Scores:");
+        for (String score : game.getHighScores()) {
+            System.out.println(score);
         }
     }
 }

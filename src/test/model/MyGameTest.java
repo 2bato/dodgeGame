@@ -47,11 +47,9 @@ public class MyGameTest {
 
     @Test
     void testCreateProjectile() {
-        testMyGame.createNewProjectile();
-        testMyGame.createNewProjectile();
-        testMyGame.createNewProjectile();
-        testMyGame.createNewProjectile();
-        assertTrue(testMyGame.getProjectiles().size() <= 4);
+        testMyGame.createNewProjectile(1);
+        testMyGame.createNewProjectile(0);
+        assertEquals(1,testMyGame.getProjectiles().size());
     }
 
     @Test

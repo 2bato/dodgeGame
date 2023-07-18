@@ -28,6 +28,9 @@ public class Projectile {
         this.dy = (ydiff / hypotenuse) * SPEED;
     }
 
+    // Setter for projectile
+    // MODIFIES: this
+    // EFFECTS: set a projectile's fields according to inputs
     public void makeDummyProjectile(int x, int y, int dx, int dy) {
         this.dx = dx;
         this.dy = dy;
