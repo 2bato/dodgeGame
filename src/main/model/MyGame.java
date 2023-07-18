@@ -14,8 +14,8 @@ public class MyGame {
     public static final int HEIGHT = 22;
     public static final Random RND = new Random();
 
-    private HighScores highScores;
-    private List<Projectile> projectiles;
+    private final HighScores highScores;
+    private final List<Projectile> projectiles;
     private Player player;
     private boolean isGameOver;
     private int gameScore;

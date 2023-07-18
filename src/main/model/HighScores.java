@@ -6,7 +6,7 @@ import java.util.*;
  * Represents an arbitrary number of ScoreEntry
  */
 public class HighScores {
-    private List<ScoreEntry> highscores;
+    private final List<ScoreEntry> highscores;
     private int gamesplayed;
 
     // Constructs a new game

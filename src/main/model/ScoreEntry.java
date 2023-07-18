@@ -4,8 +4,8 @@ package model;
  * Represents a single score entry with score and time
  */
 public class ScoreEntry {
-    private int score;
-    private String time;
+    private final int score;
+    private final String time;
 
     // Constructor a score entry
     // EFFECTS: create score entry with given time and score
