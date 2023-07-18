@@ -96,6 +96,16 @@ public class MyGame {
         }
     }
 
+    // Manually add a projectile for testing
+    // MODIFIES: this
+    // EFFECTS: adds new projectile to projectiles
+    public void addDummyProjectile(int x, int y, int dx, int dy) {
+        Projectile projectile = new Projectile(0, 0);
+        projectile.makeDummyProjectile(x, y, dx, dy);
+        projectiles.add(projectile);
+    }
+
+
     // Checks for collisions between player and projectile
     // MODIFIES: this
     // EFFECTS:  ends game and add score to high scores if collision occurs
