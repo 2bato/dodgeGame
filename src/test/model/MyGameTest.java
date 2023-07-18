@@ -38,6 +38,10 @@ public class MyGameTest {
         testMyGame.update();
         assertEquals(1, testMyGame.getGameScore());
         assertEquals(0, testMyGame.getProjectiles().size());
+        testMyGame.addDummyProjectile(-1, -1,0 ,0);
+        testMyGame.update();
+        assertEquals(2, testMyGame.getGameScore());
+        assertEquals(0, testMyGame.getProjectiles().size());
         testMyGame.addDummyProjectile(MyGame.WIDTH/2,MyGame.HEIGHT/2,0,0);
         testMyGame.update();
         assertTrue(testMyGame.getGameStatus());
