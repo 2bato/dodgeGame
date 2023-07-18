@@ -10,7 +10,7 @@ public class HighScores {
     private int gamesplayed;
 
     // Constructs a new game
-    // EFFECTS:  create empty list of ScoreEntry and gamesplayed set to 0
+    // EFFECTS:  create empty list of ScoreEntry and games played set to 0
     public HighScores() {
         this.highscores = new ArrayList<>();
         this.gamesplayed = 0;
