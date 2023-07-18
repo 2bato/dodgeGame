@@ -56,8 +56,8 @@ public class MyGameTest {
         assertEquals(MyGame.HEIGHT /2 - 1, testMyGame.getPlayer().getY());
         testMyGame.movePlayer('s');
         assertEquals(MyGame.HEIGHT /2, testMyGame.getPlayer().getY());
-        testMyGame.movePlayer('s');
-        assertEquals(MyGame.HEIGHT /2 + 1, testMyGame.getPlayer().getY());
+        testMyGame.movePlayer('q');
+        assertEquals(MyGame.HEIGHT /2, testMyGame.getPlayer().getY());
 
     }
 }

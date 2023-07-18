@@ -45,11 +45,19 @@ class ProjectileTest {
         testProjectile.makeDummyProjectile(MyGame.WIDTH, 0,1,0);
         testProjectile.move();
         assertTrue(testProjectile.handleBoundary());
-        testProjectile.makeDummyProjectile(0, MyGame.HEIGHT,0,1);
+        testProjectile.makeDummyProjectile(0, MyGame.HEIGHT,-1,1);
         testProjectile.move();
         assertTrue(testProjectile.handleBoundary());
         testProjectile.makeDummyProjectile(MyGame.WIDTH, MyGame.HEIGHT,1,1);
         testProjectile.move();
+        assertTrue(testProjectile.handleBoundary());
+        testProjectile.makeDummyProjectile(5, -5,1,1);
+        assertTrue(testProjectile.handleBoundary());
+        testProjectile.makeDummyProjectile(-5, 5,1,1);
+        assertTrue(testProjectile.handleBoundary());
+        testProjectile.makeDummyProjectile(1000, 5,1,1);
+        assertTrue(testProjectile.handleBoundary());
+        testProjectile.makeDummyProjectile(5, 1000,1,1);
         assertTrue(testProjectile.handleBoundary());
     }
 }
