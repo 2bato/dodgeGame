@@ -66,7 +66,7 @@ public class ConsoleApp {
         }
         if (stroke.getCharacter() != null && stroke.getCharacter() != 'k') {
             game.movePlayer(stroke.getCharacter());
-        } else if (stroke.getCharacter() == 'k') {
+        } else if (stroke.getCharacter() != null && stroke.getCharacter() == 'k') {
             printScores();
             System.exit(10);
         }
