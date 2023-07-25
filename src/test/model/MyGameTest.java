@@ -40,7 +40,6 @@ public class MyGameTest {
         assertEquals(0, testMyGame.getGameScore());
         testMyGame.update();
         testMyGame.update();
-        testMyGame.update();
         assertEquals(1, testMyGame.getGameScore());
         assertEquals(0, testMyGame.getProjectiles().size());
         testMyGame.addDummyProjectile(-1, -1,0 ,0);
@@ -57,6 +56,12 @@ public class MyGameTest {
         assertTrue(testMyGame.getGameStatus());
         assertEquals(1, testMyGame.getProjectiles().size());
         assertEquals(1, testMyGame.getTopHighScores().size());
+        assertTrue(testMyGame.getGameStatus());
+        testMyGame.set();
+        testMyGame.update();
+        assertFalse(testMyGame.getGameStatus());
+        testMyGame.addDummyProjectile(MyGame.WIDTH/2,MyGame.HEIGHT/2,0,0);
+        testMyGame.update();
         assertTrue(testMyGame.getGameStatus());
     }
 
