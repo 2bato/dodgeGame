@@ -1,47 +1,54 @@
 package model;
 
-import java.util.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /*
  * Represents an arbitrary number of ScoreEntry
  */
-public class HighScores {
-    private final List<ScoreEntry> highscores;
-    private int gamesplayed;
+public class HighScores implements Writable {
+    private final List<ScoreEntry> scoreEntries;
+    private int gamesPlayed;
 
     // Constructs a new game
     // EFFECTS:  create empty list of ScoreEntry and games played set to 0
     public HighScores() {
-        this.highscores = new ArrayList<>();
-        this.gamesplayed = 0;
+        this.scoreEntries = new ArrayList<>();
+        this.gamesPlayed = 0;
     }
 
     public List<ScoreEntry> getHighScores() {
-        return highscores;
+        return scoreEntries;
     }
 
     public int getGamesPlayed() {
-        return gamesplayed;
+        return gamesPlayed;
     }
 
-    // Add new ScoreEntry to HighScores
+    public void addScoreEntry(ScoreEntry se) {
+        scoreEntries.add(se);
+        gamesPlayed = scoreEntries.size();
+    }
+
+    // Create and add new ScoreEntry to HighScores
     // MODIFIES: this
     // EFFECTS: create new ScoreEntry and add to HighScores and add 1 to games played
     public void addScore(int score, String time) {
         ScoreEntry scoreEntry = new ScoreEntry(score, time);
-        highscores.add(scoreEntry);
-        gamesplayed += 1;
+        scoreEntries.add(scoreEntry);
+        gamesPlayed = scoreEntries.size();
     }
 
     // Sort HighScores by Score
-    // EFFECTS: return List of Strings of ScoreEntry sorted in descending order by score
-    public List<String> getTopHighScores() {
-        List<String> topHighScores = new ArrayList<>();
-        highscores.sort(Comparator.comparingInt(ScoreEntry::getScore).reversed());
-        for (ScoreEntry scoreEntry : highscores) {
-            topHighScores.add(scoreEntry.getScoreEntryString());
-        }
-        return topHighScores;
+    // EFFECTS: return List of ScoreEntry sorted in descending order by score
+    public List<ScoreEntry> getTopHighScores() {
+        scoreEntries.sort(Comparator.comparingInt(ScoreEntry::getScore).reversed());
+        return new ArrayList<>(scoreEntries);
     }
 
     // Retrieves the highest score entry so far
@@ -50,7 +57,27 @@ public class HighScores {
         if (getGamesPlayed() == 0) {
             return "No High Score Yet";
         } else {
-            return getTopHighScores().get(0);
+            return getTopHighScores().get(0).getScoreEntryString();
         }
+    }
+
+    // EFFECTS: returns this high scores as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gamePlayed", gamesPlayed);
+        json.put("scoreEntries", scoreEntriesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns score entries in this high scores as a JSON array
+    private JSONArray scoreEntriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (ScoreEntry s : scoreEntries) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
     }
 }

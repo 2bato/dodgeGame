@@ -1,0 +1,13 @@
+{
+    "gamePlayed": 2,
+    "scoreEntries": [
+        {
+            "score": 5,
+            "time": "today"
+        },
+        {
+            "score": 4,
+            "time": "tomorrow"
+        }
+    ]
+}

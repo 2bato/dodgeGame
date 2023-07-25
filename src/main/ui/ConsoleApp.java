@@ -9,10 +9,14 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import model.HighScores;
 import model.MyGame;
 import model.Player;
 import model.Projectile;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -23,6 +27,10 @@ public class ConsoleApp {
     private MyGame game;
     private Screen screen;
     private WindowBasedTextGUI endGui;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/highscores.json";
+
 
     // Constructs window
     // EFFECTS: creates the screen and game and begins the game cycle
@@ -31,9 +39,10 @@ public class ConsoleApp {
         screen.startScreen();
         game = new MyGame();
         game.set();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         beginTicks();
     }
-
 
 
     // Begins the game cycle
@@ -64,11 +73,21 @@ public class ConsoleApp {
         if (stroke == null) {
             return;
         }
-        if (stroke.getCharacter() != null && stroke.getCharacter() != 'k') {
+        if (stroke.getCharacter() != null && stroke.getCharacter() != 'k'
+                && stroke.getCharacter() != 'l'
+                && stroke.getCharacter() != 'm'
+                && stroke.getCharacter() != 'c'
+        ) {
             game.movePlayer(stroke.getCharacter());
         } else if (stroke.getCharacter() != null && stroke.getCharacter() == 'k') {
             printScores();
             System.exit(10);
+        } else if (stroke.getCharacter() != null && stroke.getCharacter() == 'l') {
+            loadHighScores();
+        } else if (stroke.getCharacter() != null && stroke.getCharacter() == 'm') {
+            saveHighScores();
+        } else if (stroke.getCharacter() != null && stroke.getCharacter() == 'c') {
+            clearHighScores();
         }
     }
 
@@ -156,8 +175,44 @@ public class ConsoleApp {
     // EFFECTS: print out list of high scores
     private void printScores() {
         System.out.println("High Scores:");
-        for (String score : game.getHighScores()) {
+        for (String score : game.getTopHighScores()) {
             System.out.println(score);
+        }
+    }
+
+    // EFFECTS: saves the high scores to file
+    private void saveHighScores() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(game.getHighScores());
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads high scores from file
+    private void loadHighScores() {
+        try {
+            game.setHighScores(jsonReader.read());
+            System.out.println("Loaded high scores from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: clears the high scores file
+    private void clearHighScores() {
+        HighScores hs = new HighScores();
+        try {
+            jsonWriter.open();
+            jsonWriter.write(hs);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 }

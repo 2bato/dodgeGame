@@ -14,7 +14,7 @@ public class MyGame {
     public static final int HEIGHT = 22;
     public static final Random RND = new Random();
 
-    private final HighScores highScores;
+    private HighScores highScores;
     private final List<Projectile> projectiles;
     private Player player;
     private boolean isGameOver;
@@ -28,8 +28,8 @@ public class MyGame {
         set();
     }
 
-    public List<String> getHighScores() {
-        return highScores.getTopHighScores();
+    public HighScores getHighScores() {
+        return highScores;
     }
 
     public String getHighScore() {
@@ -52,6 +52,18 @@ public class MyGame {
         return gameScore;
     }
 
+    public void setHighScores(HighScores hs) {
+        this.highScores = hs;
+    }
+
+    // EFFECTS: return high scores as a list of string
+    public List<String> getTopHighScores() {
+        List<String> topHighScores = new ArrayList<>();
+        for (ScoreEntry scoreEntry : highScores.getTopHighScores()) {
+            topHighScores.add(scoreEntry.getScoreEntryString());
+        }
+        return topHighScores;
+    }
 
     // Sets / resets the game
     // MODIFIES: this

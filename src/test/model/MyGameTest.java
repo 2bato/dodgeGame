@@ -19,7 +19,7 @@ public class MyGameTest {
     @Test
     void testConstructor() {
         assertEquals(0, testMyGame.getProjectiles().size());
-        assertEquals(0, testMyGame.getHighScores().size());
+        assertEquals(0, testMyGame.getTopHighScores().size());
         assertEquals(MyGame.WIDTH / 2, testMyGame.getPlayer().getX());
         assertEquals(MyGame.HEIGHT / 2, testMyGame.getPlayer().getY());
         assertFalse(testMyGame.getGameStatus());
@@ -46,7 +46,7 @@ public class MyGameTest {
         testMyGame.update();
         assertTrue(testMyGame.getGameStatus());
         assertEquals(0, testMyGame.getProjectiles().size());
-        assertEquals(1, testMyGame.getHighScores().size());
+        assertEquals(1, testMyGame.getTopHighScores().size());
     }
 
     @Test
