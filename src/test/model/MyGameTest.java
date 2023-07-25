@@ -33,11 +33,13 @@ public class MyGameTest {
     void testUpdate() {
         testMyGame.update();
         assertFalse(testMyGame.getGameStatus());
-        testMyGame.addDummyProjectile(1, 1, -1, -1);
+        testMyGame.addDummyProjectile(2, 2, -1, -1);
         testMyGame.update();
-        assertEquals(0, testMyGame.getProjectiles().get(0).getX());
-        assertEquals(0, testMyGame.getProjectiles().get(0).getY());
+        assertEquals(1, testMyGame.getProjectiles().get(0).getX());
+        assertEquals(1, testMyGame.getProjectiles().get(0).getY());
         assertEquals(0, testMyGame.getGameScore());
+        testMyGame.update();
+        testMyGame.update();
         testMyGame.update();
         assertEquals(1, testMyGame.getGameScore());
         assertEquals(0, testMyGame.getProjectiles().size());
@@ -50,6 +52,12 @@ public class MyGameTest {
         assertTrue(testMyGame.getGameStatus());
         assertEquals(0, testMyGame.getProjectiles().size());
         assertEquals(1, testMyGame.getTopHighScores().size());
+        testMyGame.addDummyProjectile(MyGame.WIDTH/2,MyGame.HEIGHT/2,1,1);
+        testMyGame.update();
+        assertTrue(testMyGame.getGameStatus());
+        assertEquals(1, testMyGame.getProjectiles().size());
+        assertEquals(1, testMyGame.getTopHighScores().size());
+        assertTrue(testMyGame.getGameStatus());
     }
 
     @Test
