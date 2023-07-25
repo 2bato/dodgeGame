@@ -77,6 +77,12 @@ public class MyGameTest {
         testMyGame.createNewProjectile();
         testMyGame.createNewProjectile();
         testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
+        testMyGame.createNewProjectile();
         assertTrue(testMyGame.getProjectiles().size() <= 10);
     }
 
