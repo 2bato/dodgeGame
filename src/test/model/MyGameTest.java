@@ -97,11 +97,16 @@ public class MyGameTest {
     @Test
     void testGetHighScore() {
         HighScores hs = new HighScores();
-        ScoreEntry se = new ScoreEntry(5, "now");
-        hs.addScoreEntry(se);
+        ScoreEntry se1 = new ScoreEntry(5, "now");
+        ScoreEntry se2 = new ScoreEntry(4, "now");
+        ScoreEntry se3 = new ScoreEntry(7, "now");
         assertEquals("No High Score Yet", testMyGame.getHighScore());
+        hs.addScoreEntry(se1);
+        hs.addScoreEntry(se2);
+        hs.addScoreEntry(se3);
         testMyGame.setHighScores(hs);
-        assertEquals(1,testMyGame.getHighScores().getHighScores().size());
-        assertEquals(se,testMyGame.getHighScores().getHighScores().get(0));
+        assertEquals(3,testMyGame.getHighScores().getHighScores().size());
+        assertEquals(se1,testMyGame.getHighScores().getHighScores().get(0));
+        assertEquals("7 now",testMyGame.getTopHighScores().get(0));
     }
 }
