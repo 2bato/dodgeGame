@@ -24,6 +24,9 @@ public class MyGameTest {
         assertEquals(MyGame.HEIGHT / 2, testMyGame.getPlayer().getY());
         assertFalse(testMyGame.getGameStatus());
         assertEquals(0, testMyGame.getGameScore());
+        assertEquals(0, testMyGame.getHighScores().getHighScores().size());
+        assertEquals(0, testMyGame.getHighScores().getGamesPlayed());
+
     }
 
     @Test
@@ -93,6 +96,12 @@ public class MyGameTest {
 
     @Test
     void testGetHighScore() {
+        HighScores hs = new HighScores();
+        ScoreEntry se = new ScoreEntry(5, "now");
+        hs.addScoreEntry(se);
         assertEquals("No High Score Yet", testMyGame.getHighScore());
+        testMyGame.setHighScores(hs);
+        assertEquals(1,testMyGame.getHighScores().getHighScores().size());
+        assertEquals(se,testMyGame.getHighScores().getHighScores().get(0));
     }
 }
