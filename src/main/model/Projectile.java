@@ -1,14 +1,17 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /*
  * Represents a projectile.
  */
-public class Projectile {
+public class Projectile implements Writable {
 
-    public static final int SIZE = 1;
-    public static final Double SPEED = 0.5;
+    public static final int SIZE = 20;
+    public static final Double SPEED = 6.0;
 
     private double dx;
     private double dy;
@@ -31,7 +34,7 @@ public class Projectile {
     // Setter for projectile
     // MODIFIES: this
     // EFFECTS: set a projectile's fields according to inputs
-    public void makeDummyProjectile(int x, int y, int dx, int dy) {
+    public void makeDummyProjectile(double x, double y, double dx, double dy) {
         this.dx = dx;
         this.dy = dy;
         this.xcoord = x;
@@ -90,5 +93,16 @@ public class Projectile {
     // EFFECTS: return true if projectile is out of bounds and false otherwise
     public Boolean handleBoundary() {
         return getY() < 0 || getY() > MyGame.HEIGHT || getX() < 0 || getX() > MyGame.WIDTH;
+    }
+
+    // EFFECTS: returns this projectile as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("dx", dx);
+        json.put("dy", dy);
+        json.put("xcoord", xcoord);
+        json.put("ycoord", ycoord);
+        return json;
     }
 }

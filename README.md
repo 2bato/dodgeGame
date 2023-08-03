@@ -19,3 +19,6 @@ on than a simple game?
 - As a user, I want to be able to see my current score.
 - As a user, I want to be able to have my game score added to the high-score list.
 - As a user, I want to be able to view my high-scores.
+- As a user, I want to be able to save my high-scores if I wish to do so.
+- As a user, I want to be able to load my saved high-scores if I wish to do so.
+- As a user, I want to be able to see the projectile on the screen.

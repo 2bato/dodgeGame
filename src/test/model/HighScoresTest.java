@@ -16,38 +16,27 @@ class HighScoresTest {
 
     @Test
     void testConstructor() {
-        assertEquals(0, testHighScores.getHighScores().size());
+        assertEquals(0, testHighScores.getScoreEntries().size());
         assertEquals(0, testHighScores.getGamesPlayed());
     }
 
     @Test
-    void testGetTopHighScores() {
+    void testGetScoreEntries() {
         testHighScores.addScore(5, "1");
         testHighScores.addScore(3, "2");
         testHighScores.addScore(7, "3");
         testHighScores.addScore(2, "4");
         testHighScores.addScore(10, "6");
         testHighScores.addScore(1, "5");
-        assertEquals("10 6",testHighScores.getTopHighScores().get(0).getScoreEntryString());
-        assertEquals("7 3",testHighScores.getTopHighScores().get(1).getScoreEntryString());
-    }
-
-    @Test
-    void testGetHighScore() {
-        assertEquals("No High Score Yet",testHighScores.getHighScore());
-        testHighScores.addScore(5, "1");
-        assertEquals("5 1",testHighScores.getHighScore());
-        testHighScores.addScore(20, "1");
-        assertEquals("20 1",testHighScores.getHighScore());
-        testHighScores.addScore(18, "1");
-        assertEquals("20 1",testHighScores.getHighScore());
+        assertEquals("5 1",testHighScores.getScoreEntries().get(0).getScoreEntryString());
+        assertEquals("3 2",testHighScores.getScoreEntries().get(1).getScoreEntryString());
     }
 
     @Test
     void testAddScore() {
         testHighScores.addScore(5, "1");
-        assertEquals(5,testHighScores.getHighScores().get(0).getScore());
-        assertEquals("1",testHighScores.getHighScores().get(0).getTime());
+        assertEquals(5,testHighScores.getScoreEntries().get(0).getScore());
+        assertEquals("1",testHighScores.getScoreEntries().get(0).getTime());
     }
 
 }

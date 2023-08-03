@@ -1,7 +1,7 @@
 package persistence;
 
 
-import model.HighScores;
+import model.MyGame;
 import model.ScoreEntry;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            HighScores hs = reader.read();
+            MyGame g = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -25,27 +25,28 @@ class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderEmptyHighScores() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyHighScores.json");
+    void testReaderEmptyMyGame() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyMyGame.json");
         try {
-            HighScores hs = reader.read();
-            assertEquals(0, hs.getGamesPlayed());
-            assertEquals(0, hs.getHighScores().size());
+            MyGame g = reader.read();
+            assertEquals(0, g.getGameScore());
+            assertEquals(0, g.getProjectiles().size());
+            assertEquals(0,g.getHighScores().getGamesPlayed());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
 
     @Test
-    void testReaderGeneralHighScores() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralHighScores.json");
+    void testReaderGeneralMyGame() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralMyGame.json");
         try {
-            HighScores hs = reader.read();
-            assertEquals(2, hs.getGamesPlayed());
-            List<ScoreEntry> ScoreEntries = hs.getHighScores();
-            assertEquals(2, ScoreEntries.size());
-            checkScoreEntry("2023/07/25 11:51:12", 18, ScoreEntries.get(0));
-            checkScoreEntry("2023/07/25 11:50:28", 7, ScoreEntries.get(1));
+            MyGame g = reader.read();
+            assertEquals(5, g.getHighScores().getGamesPlayed());
+            List<ScoreEntry> ScoreEntries = g.getHighScores().getScoreEntries();
+            assertEquals(5, ScoreEntries.size());
+            checkScoreEntry("2023/08/03 03:43:30", 13, ScoreEntries.get(0));
+            checkScoreEntry("2023/08/03 03:43:46", 8, ScoreEntries.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

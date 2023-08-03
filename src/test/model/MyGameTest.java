@@ -19,12 +19,12 @@ public class MyGameTest {
     @Test
     void testConstructor() {
         assertEquals(0, testMyGame.getProjectiles().size());
-        assertEquals(0, testMyGame.getTopHighScores().size());
+        assertEquals(0, testMyGame.getHighScoresString().size());
         assertEquals(MyGame.WIDTH / 2, testMyGame.getPlayer().getX());
         assertEquals(MyGame.HEIGHT / 2, testMyGame.getPlayer().getY());
         assertFalse(testMyGame.getGameStatus());
         assertEquals(0, testMyGame.getGameScore());
-        assertEquals(0, testMyGame.getHighScores().getHighScores().size());
+        assertEquals(0, testMyGame.getHighScores().getScoreEntries().size());
         assertEquals(0, testMyGame.getHighScores().getGamesPlayed());
 
     }
@@ -35,27 +35,29 @@ public class MyGameTest {
         assertFalse(testMyGame.getGameStatus());
         testMyGame.addDummyProjectile(2, 2, -1, -1);
         testMyGame.update();
-        assertEquals(1, testMyGame.getProjectiles().get(0).getX());
-        assertEquals(1, testMyGame.getProjectiles().get(0).getY());
+        assertEquals(1,
+                testMyGame.getProjectiles().get(testMyGame.getProjectiles().size() - 1).getX());
+        assertEquals(1,
+                testMyGame.getProjectiles().get(testMyGame.getProjectiles().size() - 1).getY());
         assertEquals(0, testMyGame.getGameScore());
         testMyGame.update();
         testMyGame.update();
         assertEquals(1, testMyGame.getGameScore());
-        assertEquals(0, testMyGame.getProjectiles().size());
+        assertTrue(testMyGame.getProjectiles().size() <= 2);
         testMyGame.addDummyProjectile(-1, -1,0 ,0);
         testMyGame.update();
         assertEquals(2, testMyGame.getGameScore());
-        assertEquals(0, testMyGame.getProjectiles().size());
+        assertTrue(testMyGame.getProjectiles().size() <= 1);
         testMyGame.addDummyProjectile(MyGame.WIDTH/2,MyGame.HEIGHT/2,0,0);
         testMyGame.update();
         assertTrue(testMyGame.getGameStatus());
         assertEquals(0, testMyGame.getProjectiles().size());
-        assertEquals(1, testMyGame.getTopHighScores().size());
+        assertEquals(1, testMyGame.getHighScoresString().size());
         testMyGame.addDummyProjectile(MyGame.WIDTH/2,MyGame.HEIGHT/2,1,1);
         testMyGame.update();
         assertTrue(testMyGame.getGameStatus());
         assertEquals(1, testMyGame.getProjectiles().size());
-        assertEquals(1, testMyGame.getTopHighScores().size());
+        assertEquals(1, testMyGame.getHighScoresString().size());
         assertTrue(testMyGame.getGameStatus());
         testMyGame.set();
         testMyGame.update();
@@ -102,11 +104,11 @@ public class MyGameTest {
     @Test
     void testMovePlayer() {
         testMyGame.movePlayer('a');
-        assertEquals(MyGame.WIDTH / 2 - 1, testMyGame.getPlayer().getX());
+        assertEquals(MyGame.WIDTH / 2 - 15, testMyGame.getPlayer().getX());
         testMyGame.movePlayer('d');
         assertEquals(MyGame.WIDTH / 2, testMyGame.getPlayer().getX());
         testMyGame.movePlayer('w');
-        assertEquals(MyGame.HEIGHT / 2 - 1, testMyGame.getPlayer().getY());
+        assertEquals(MyGame.HEIGHT / 2 - 15, testMyGame.getPlayer().getY());
         testMyGame.movePlayer('s');
         assertEquals(MyGame.HEIGHT / 2, testMyGame.getPlayer().getY());
         testMyGame.movePlayer('q');
@@ -119,13 +121,12 @@ public class MyGameTest {
         ScoreEntry se1 = new ScoreEntry(5, "now");
         ScoreEntry se2 = new ScoreEntry(4, "now");
         ScoreEntry se3 = new ScoreEntry(7, "now");
-        assertEquals("No High Score Yet", testMyGame.getHighScore());
         hs.addScoreEntry(se1);
         hs.addScoreEntry(se2);
         hs.addScoreEntry(se3);
         testMyGame.setHighScores(hs);
-        assertEquals(3,testMyGame.getHighScores().getHighScores().size());
-        assertEquals(se1,testMyGame.getHighScores().getHighScores().get(0));
-        assertEquals("7 now",testMyGame.getTopHighScores().get(0));
+        assertEquals(3,testMyGame.getHighScores().getScoreEntries().size());
+        assertEquals(se1,testMyGame.getHighScores().getScoreEntries().get(0));
+        assertEquals("5 now",testMyGame.getHighScoresString().get(0));
     }
 }

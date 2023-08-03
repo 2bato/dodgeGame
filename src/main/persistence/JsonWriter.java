@@ -1,11 +1,12 @@
 package persistence;
 
-import model.HighScores;
+import model.MyGame;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Based from JsonSerializationDemo
 // Represents a writer that writes JSON representation of high scores to file
 public class JsonWriter {
     private static final int TAB = 4;
@@ -26,8 +27,8 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of high scores to file
-    public void write(HighScores hs) {
-        JSONObject json = hs.toJson();
+    public void write(MyGame g) {
+        JSONObject json = g.toJson();
         saveToFile(json.toString(TAB));
     }
 

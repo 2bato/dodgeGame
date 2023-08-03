@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Represents an arbitrary number of ScoreEntry
  */
 public class HighScores implements Writable {
-    private final List<ScoreEntry> scoreEntries;
+    private List<ScoreEntry> scoreEntries;
     private int gamesPlayed;
 
     // Constructs a new game
@@ -22,7 +23,7 @@ public class HighScores implements Writable {
         this.gamesPlayed = 0;
     }
 
-    public List<ScoreEntry> getHighScores() {
+    public List<ScoreEntry> getScoreEntries() {
         return scoreEntries;
     }
 
@@ -30,6 +31,13 @@ public class HighScores implements Writable {
         return gamesPlayed;
     }
 
+    public void clearHighScores() {
+        scoreEntries = Collections.emptyList();
+        gamesPlayed = 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: add given score entries and add 1 games played
     public void addScoreEntry(ScoreEntry se) {
         scoreEntries.add(se);
         gamesPlayed = scoreEntries.size();
@@ -44,21 +52,12 @@ public class HighScores implements Writable {
         gamesPlayed = scoreEntries.size();
     }
 
-    // Sort HighScores by Score
-    // EFFECTS: return List of ScoreEntry sorted in descending order by score
-    public List<ScoreEntry> getTopHighScores() {
+    public void highToLow() {
         scoreEntries.sort(Comparator.comparingInt(ScoreEntry::getScore).reversed());
-        return new ArrayList<>(scoreEntries);
     }
 
-    // Retrieves the highest score entry so far
-    // EFFECTS: return the highest score entry in high scores as string
-    public String getHighScore() {
-        if (getGamesPlayed() == 0) {
-            return "No High Score Yet";
-        } else {
-            return getTopHighScores().get(0).getScoreEntryString();
-        }
+    public void lowToHigh() {
+        scoreEntries.sort(Comparator.comparingInt(ScoreEntry::getScore));
     }
 
     // EFFECTS: returns this high scores as a JSON object

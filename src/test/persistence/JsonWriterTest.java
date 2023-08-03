@@ -2,7 +2,7 @@ package persistence;
 
 import org.junit.jupiter.api.Test;
 
-import model.HighScores;
+import model.MyGame;
 import model.ScoreEntry;
 import java.io.IOException;
 import java.util.List;
@@ -14,7 +14,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            HighScores hs = new HighScores();
+            MyGame g = new MyGame();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -24,38 +24,38 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterEmptyHighScores() {
+    void testWriterEmptyMyGame() {
         try {
-            HighScores hs = new HighScores();
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyHighScores.json");
+            MyGame g = new MyGame();
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyMyGame.json");
             writer.open();
-            writer.write(hs);
+            writer.write(g);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyHighScores.json");
-            hs = reader.read();
-            assertEquals(0, hs.getGamesPlayed());
-            assertEquals(0, hs.getHighScores().size());
+            JsonReader reader = new JsonReader("./data/testWriterEmptyMyGame.json");
+            g = reader.read();
+            assertEquals(0, g.getGameScore());
+            assertEquals(0, g.getProjectiles().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
     @Test
-    void testWriterGeneralHighScores() {
+    void testWriterGeneralMyGame() {
         try {
-            HighScores hs = new HighScores();
-            hs.addScoreEntry(new ScoreEntry(5, "today"));
-            hs.addScoreEntry(new ScoreEntry(4, "tomorrow"));
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralHighScores.json");
+            MyGame g = new MyGame();
+            g.addDummyProjectile(1,1,1,1);
+            g.addDummyProjectile(1,1,1,1);
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralMyGame.json");
             writer.open();
-            writer.write(hs);
+            writer.write(g);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralHighScores.json");
-            hs = reader.read();
-            assertEquals(2, hs.getGamesPlayed());
-            List<ScoreEntry> ScoreEntries = hs.getHighScores();
+            JsonReader reader = new JsonReader("./data/testWriterGeneralMyGame.json");
+            g = reader.read();
+            assertEquals(2, g.getHighScores().getGamesPlayed());
+            List<ScoreEntry> ScoreEntries = g.getHighScores().getScoreEntries();
             assertEquals(2, ScoreEntries.size());
             checkScoreEntry("today", 5, ScoreEntries.get(0));
             checkScoreEntry("tomorrow", 4, ScoreEntries.get(1));

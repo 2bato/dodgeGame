@@ -18,7 +18,7 @@ class PlayerTest {
 
     @BeforeEach
     void runBefore() {
-        testPlayer = new Player(5, 5);
+        testPlayer = new Player(50, 50);
         testPlayerTopl = new Player(1 , 1);
         testPlayerTopr = new Player(MyGame.WIDTH - 1 , 1);
         testPlayerBotl = new Player(1 , MyGame.HEIGHT - 1);
@@ -27,36 +27,36 @@ class PlayerTest {
 
     @Test
     void testConstructor() {
-        assertEquals(5, testPlayer.getX());
-        assertEquals(5, testPlayer.getY());
+        assertEquals(50, testPlayer.getX());
+        assertEquals(50, testPlayer.getY());
     }
 
     @Test
     void testMoveLeft() {
         testPlayer.moveLeft();
-        assertEquals(4, testPlayer.getX());
-        assertEquals(5, testPlayer.getY());
+        assertEquals(35, testPlayer.getX());
+        assertEquals(50, testPlayer.getY());
     }
 
     @Test
     void testMoveRight() {
         testPlayer.moveRight();
-        assertEquals(6, testPlayer.getX());
-        assertEquals(5, testPlayer.getY());
+        assertEquals(65, testPlayer.getX());
+        assertEquals(50, testPlayer.getY());
     }
 
     @Test
     void testMoveUp() {
         testPlayer.moveUp();
-        assertEquals(5, testPlayer.getX());
-        assertEquals(4, testPlayer.getY());
+        assertEquals(50, testPlayer.getX());
+        assertEquals(35, testPlayer.getY());
     }
 
     @Test
     void testMoveDown() {
         testPlayer.moveDown();
-        assertEquals(5, testPlayer.getX());
-        assertEquals(6, testPlayer.getY());
+        assertEquals(50, testPlayer.getX());
+        assertEquals(65, testPlayer.getY());
     }
 
     @Test
@@ -101,15 +101,15 @@ class PlayerTest {
     @Test
     void testCheckHit() {
         Projectile p = new Projectile(1,2);
-        p.makeDummyProjectile(5,5,0,0);
+        p.makeDummyProjectile(50,50,0,0);
         assertTrue(testPlayer.checkHit(p));
-        p.makeDummyProjectile(10,10,0,0);
-        assertFalse(testPlayer.checkHit(p));
-        p.makeDummyProjectile(6,6,0,0);
+        p.makeDummyProjectile(21,21,0,0);
+        assertTrue(testPlayer.checkHit(p));
+        p.makeDummyProjectile(20,20,0,0);
         assertFalse(testPlayer.checkHit(p));
         p.makeDummyProjectile(4,6,0,0);
         assertFalse(testPlayer.checkHit(p));
-        p.makeDummyProjectile(4,4,0,0);
+        p.makeDummyProjectile(51,51,0,0);
         assertTrue(testPlayer.checkHit(p));
     }
 }

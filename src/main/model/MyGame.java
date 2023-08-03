@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,13 +13,13 @@ import java.util.Random;
 /*
  * Represents a new game. (based from Space Invader)
  */
-public class MyGame {
-    public static final int WIDTH = 39;
-    public static final int HEIGHT = 22;
+public class MyGame implements Writable {
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 800;
     public static final Random RND = new Random();
 
     private HighScores highScores;
-    private final List<Projectile> projectiles;
+    private List<Projectile> projectiles;
     private Player player;
     private boolean isGameOver;
     private int gameScore;
@@ -30,10 +34,6 @@ public class MyGame {
 
     public HighScores getHighScores() {
         return highScores;
-    }
-
-    public String getHighScore() {
-        return highScores.getHighScore();
     }
 
     public boolean getGameStatus() {
@@ -52,17 +52,33 @@ public class MyGame {
         return gameScore;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setGameOver(Boolean b) {
+        this.isGameOver = b;
+    }
+
+    public void setGameScore(int score) {
+        this.gameScore = score;
+    }
+
     public void setHighScores(HighScores hs) {
         this.highScores = hs;
     }
 
+    public void setProjectiles(List<Projectile> projectiles) {
+        this.projectiles = projectiles;
+    }
+
     // EFFECTS: return high scores as a list of string
-    public List<String> getTopHighScores() {
-        List<String> topHighScores = new ArrayList<>();
-        for (ScoreEntry scoreEntry : highScores.getTopHighScores()) {
-            topHighScores.add(scoreEntry.getScoreEntryString());
+    public List<String> getHighScoresString() {
+        List<String> highScoresString = new ArrayList<>();
+        for (ScoreEntry scoreEntry : highScores.getScoreEntries()) {
+            highScoresString.add(scoreEntry.getScoreEntryString());
         }
-        return topHighScores;
+        return highScoresString;
     }
 
     // Sets / resets the game
@@ -79,9 +95,11 @@ public class MyGame {
     // MODIFIES: this
     // EFFECTS:  updates player and projectiles
     public void update() {
-        updateProjectiles();
-        createNewProjectile();
-        checkGameOver();
+        if (!isGameOver) {
+            updateProjectiles();
+            createNewProjectile();
+            checkGameOver();
+        }
     }
 
     // Updates projectiles
@@ -153,5 +171,28 @@ public class MyGame {
         } else if (character == 's') {
             player.moveDown();
         }
+    }
+
+    // EFFECTS: returns this game as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("score", gameScore);
+        json.put("highscores", highScores.toJson());
+        json.put("player", player.toJson());
+        json.put("projectiles", projectilesToJson());
+        json.put("gamestatus", isGameOver);
+        return json;
+    }
+
+    // EFFECTS: returns projectiles in this game as a JSON array
+    private JSONArray projectilesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Projectile p : projectiles) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 }

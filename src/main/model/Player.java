@@ -1,37 +1,40 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.awt.*;
 
 
 /*
  * Represents the player.
  */
-public class Player {
-    public static final int SIZE = 2;
-    public static final int SPEED = 1;
-    private int xcoord;
-    private int ycoord;
+public class Player implements Writable {
+    public static final int SIZE = 40;
+    public static final int SPEED = 15;
+    private int x;
+    private int y;
 
     // Constructor for Player.
     // EFFECTS: create player at position x, y.
     public Player(int x, int y) {
-        this.xcoord = x;
-        this.ycoord = y;
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {
-        return xcoord;
+        return x;
     }
 
     public int getY() {
-        return ycoord;
+        return y;
     }
 
     // Move play left
     // MODIFIES: this
     // EFFECTS: move player left by SPEED
     public void moveLeft() {
-        xcoord -= SPEED;
+        x -= SPEED;
         handleBoundary();
     }
 
@@ -39,7 +42,7 @@ public class Player {
     // MODIFIES: this
     // EFFECTS: move player right by SPEED
     public void moveRight() {
-        xcoord += SPEED;
+        x += SPEED;
         handleBoundary();
     }
 
@@ -47,7 +50,7 @@ public class Player {
     // MODIFIES: this
     // EFFECTS: move player up by SPEED
     public void moveUp() {
-        ycoord -= SPEED;
+        y -= SPEED;
         handleBoundary();
     }
 
@@ -55,7 +58,7 @@ public class Player {
     // MODIFIES: this
     // EFFECTS: move player down by SPEED
     public void moveDown() {
-        ycoord += SPEED;
+        y += SPEED;
         handleBoundary();
     }
 
@@ -64,14 +67,14 @@ public class Player {
     // MODIFIES: this
     // EFFECTS: moves player back if it goes beyond boundaries
     private void handleBoundary() {
-        if (xcoord < 0) {
-            xcoord = 0;
-        } else if (xcoord > MyGame.WIDTH) {
-            xcoord = MyGame.WIDTH;
-        } else if (ycoord < 0) {
-            ycoord = 0;
-        } else if (ycoord > MyGame.HEIGHT) {
-            ycoord = MyGame.HEIGHT;
+        if (x < 0) {
+            x = 0;
+        } else if (x > MyGame.WIDTH) {
+            x = MyGame.WIDTH;
+        } else if (y < 0) {
+            y = 0;
+        } else if (y > MyGame.HEIGHT) {
+            y = MyGame.HEIGHT;
         }
     }
 
@@ -83,6 +86,15 @@ public class Player {
         Rectangle projectileBoundingRect = new Rectangle((int) (p.getX() - Projectile.SIZE / 2), (int) (p.getY()
                 - Projectile.SIZE / 2), Projectile.SIZE, Projectile.SIZE);
         return playerBoundingSquare.intersects(projectileBoundingRect);
+    }
+
+    // EFFECTS: returns this player as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("x", x);
+        json.put("y", y);
+        return json;
     }
 }
 
