@@ -10,8 +10,7 @@ import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_R;
 
 /*
- * Represents the main window in which the space invaders
- * game is played
+ * Represents the main window in which the game is played
  */
 public class Game extends JFrame {
 
@@ -23,7 +22,7 @@ public class Game extends JFrame {
     // Constructs main window
     // effects: sets up window in which Space Invaders game will be played
     public Game() {
-        super("Space Invaders");
+        super("Save the Ducky");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
         game = new MyGame();

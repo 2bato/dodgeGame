@@ -21,8 +21,11 @@ public class GamePanel extends JPanel {
     private static final String REPLAY = "R to replay";
     private MyGame game;
     private BufferedImage cannonball;
+    // "Cannonball" by Flixberry Entertainment licensed CC-BY 4.0: https://opengameart.org/content/cannonball
     private BufferedImage background;
-    private BufferedImage ship;
+    // "Water" by Aswin Vos licensed CC-BY-SA 3.0: https://opengameart.org/content/water
+    private BufferedImage duck;
+    // "Rubber Duck" by tgfcoder licensed CC0: https://opengameart.org/content/rubber-duck
 
 
 
@@ -54,39 +57,39 @@ public class GamePanel extends JPanel {
     }
 
     // Draws the game
-    // modifies: g
-    // effects:  draws the game onto g
+    // MODIFIES: g
+    // EFFECTS:  draws the game onto g
     private void drawGame(Graphics g) {
         drawPlayer(g);
         drawProjectiles(g);
     }
 
     // Draw the player
-    // modifies: g
-    // effects:  draws the tank onto g
+    // MODIFIES: g
+    // EFFECTS:  draws the tank onto g
     private void drawPlayer(Graphics g) {
         Player p = game.getPlayer();
 
         try {
-            ship = ImageIO.read(new File("data/ship.png"));
+            duck = ImageIO.read(new File("data/RubberDucky.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        g.drawImage(ship, p.getX() - Player.SIZE / 2,
+        g.drawImage(duck, p.getX() - Player.SIZE / 2,
                 p.getY() - Player.SIZE / 2, Player.SIZE, Player.SIZE, null);
     }
 
-    // Draws the missiles
+    // Draws the projectiles
     // modifies: g
-    // effects:  draws the missiles onto g
+    // effects:  draws the projectiles onto g
     private void drawProjectiles(Graphics g) {
         for (Projectile next : game.getProjectiles()) {
             drawProjectile(g, next);
         }
     }
 
-    // Draws a missile
+    // Draws a projectile
     // modifies: g
     // effects:  draws the Projectile m onto g
     private void drawProjectile(Graphics g, Projectile m) {
