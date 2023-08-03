@@ -47,6 +47,11 @@ class JsonReaderTest extends JsonTest {
             assertEquals(5, ScoreEntries.size());
             checkScoreEntry("2023/08/03 03:43:30", 13, ScoreEntries.get(0));
             checkScoreEntry("2023/08/03 03:43:46", 8, ScoreEntries.get(1));
+            checkPlayer(460,400, g.getPlayer());
+            checkProjectile(0.12353567311725536,-5.99872810998027,
+                    397.6922545784321,512.0, g.getProjectiles().get(0));
+            checkProjectile(3.4430983748688737,-4.913763687945863,
+                    278.10055862719594,573.0, g.getProjectiles().get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

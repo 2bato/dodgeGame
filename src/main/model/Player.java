@@ -12,29 +12,29 @@ import java.awt.*;
 public class Player implements Writable {
     public static final int SIZE = 40;
     public static final int SPEED = 15;
-    private int x;
-    private int y;
+    private int xcoord;
+    private int ycoord;
 
     // Constructor for Player.
     // EFFECTS: create player at position x, y.
     public Player(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.xcoord = x;
+        this.ycoord = y;
     }
 
     public int getX() {
-        return x;
+        return xcoord;
     }
 
     public int getY() {
-        return y;
+        return ycoord;
     }
 
     // Move play left
     // MODIFIES: this
     // EFFECTS: move player left by SPEED
     public void moveLeft() {
-        x -= SPEED;
+        xcoord -= SPEED;
         handleBoundary();
     }
 
@@ -42,7 +42,7 @@ public class Player implements Writable {
     // MODIFIES: this
     // EFFECTS: move player right by SPEED
     public void moveRight() {
-        x += SPEED;
+        xcoord += SPEED;
         handleBoundary();
     }
 
@@ -50,7 +50,7 @@ public class Player implements Writable {
     // MODIFIES: this
     // EFFECTS: move player up by SPEED
     public void moveUp() {
-        y -= SPEED;
+        ycoord -= SPEED;
         handleBoundary();
     }
 
@@ -58,7 +58,7 @@ public class Player implements Writable {
     // MODIFIES: this
     // EFFECTS: move player down by SPEED
     public void moveDown() {
-        y += SPEED;
+        ycoord += SPEED;
         handleBoundary();
     }
 
@@ -67,14 +67,14 @@ public class Player implements Writable {
     // MODIFIES: this
     // EFFECTS: moves player back if it goes beyond boundaries
     private void handleBoundary() {
-        if (x < 0) {
-            x = 0;
-        } else if (x > MyGame.WIDTH) {
-            x = MyGame.WIDTH;
-        } else if (y < 0) {
-            y = 0;
-        } else if (y > MyGame.HEIGHT) {
-            y = MyGame.HEIGHT;
+        if (xcoord < 0) {
+            xcoord = 0;
+        } else if (xcoord > MyGame.WIDTH) {
+            xcoord = MyGame.WIDTH;
+        } else if (ycoord < 0) {
+            ycoord = 0;
+        } else if (ycoord > MyGame.HEIGHT) {
+            ycoord = MyGame.HEIGHT;
         }
     }
 
@@ -92,8 +92,8 @@ public class Player implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("x", x);
-        json.put("y", y);
+        json.put("x", xcoord);
+        json.put("y", ycoord);
         return json;
     }
 }

@@ -1,4 +1,13 @@
 {
-    "gamePlayed": 0,
-    "scoreEntries": []
+    "score": 0,
+    "gamestatus": false,
+    "highscores": {
+        "gamePlayed": 0,
+        "scoreEntries": []
+    },
+    "projectiles": [],
+    "player": {
+        "x": 400,
+        "y": 400
+    }
 }

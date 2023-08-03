@@ -1,13 +1,29 @@
 {
-    "gamePlayed": 2,
-    "scoreEntries": [
-        {
+    "score": 0,
+    "gamestatus": false,
+    "highscores": {
+        "gamePlayed": 1,
+        "scoreEntries": [{
             "score": 5,
-            "time": "today"
+            "time": "now"
+        }]
+    },
+    "projectiles": [
+        {
+            "xcoord": 5,
+            "dx": 2,
+            "dy": 1,
+            "ycoord": 5
         },
         {
-            "score": 4,
-            "time": "tomorrow"
+            "xcoord": 21,
+            "dx": 3,
+            "dy": 1,
+            "ycoord": 21
         }
-    ]
+    ],
+    "player": {
+        "x": 400,
+        "y": 415
+    }
 }
