@@ -42,6 +42,8 @@ public class GamePanel extends JPanel {
         }
     }
 
+    // Draws the panel
+    // EFFECTS: draws g onto panel
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

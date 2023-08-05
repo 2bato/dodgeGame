@@ -31,6 +31,8 @@ public class HighScores implements Writable {
         return gamesPlayed;
     }
 
+    // MODIFIES: this
+    // EFFECTS: clear score entries and set games played to 0
     public void clearHighScores() {
         scoreEntries = Collections.emptyList();
         gamesPlayed = 0;
