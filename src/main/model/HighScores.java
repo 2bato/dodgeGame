@@ -52,10 +52,16 @@ public class HighScores implements Writable {
         gamesPlayed = scoreEntries.size();
     }
 
+    // Sorts score from high to low
+    // MODIFIES: this
+    // EFFECTS: sort score entries based on score from high to low
     public void highToLow() {
         scoreEntries.sort(Comparator.comparingInt(ScoreEntry::getScore).reversed());
     }
 
+    // Sorts score from low to high
+    // MODIFIES: this
+    // EFFECTS: sort score entries based on score from low to high
     public void lowToHigh() {
         scoreEntries.sort(Comparator.comparingInt(ScoreEntry::getScore));
     }

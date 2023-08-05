@@ -30,8 +30,7 @@ public class GamePanel extends JPanel {
 
 
     // Constructs a game panel
-    // effects:  sets size and background colour of panel, 
-    //           updates this with the game to be displayed
+    // EFFECTS:  sets size and background colour of panel, updates this with the game to be displayed
     public GamePanel(MyGame g) {
         setPreferredSize(new Dimension(MyGame.WIDTH, MyGame.HEIGHT));
         setBackground(Color.white);
@@ -81,8 +80,8 @@ public class GamePanel extends JPanel {
     }
 
     // Draws the projectiles
-    // modifies: g
-    // effects:  draws the projectiles onto g
+    // MODIFIES: g
+    // EFFECTS:  draws the projectiles onto g
     private void drawProjectiles(Graphics g) {
         for (Projectile next : game.getProjectiles()) {
             drawProjectile(g, next);
@@ -90,8 +89,8 @@ public class GamePanel extends JPanel {
     }
 
     // Draws a projectile
-    // modifies: g
-    // effects:  draws the Projectile m onto g
+    // MODIFIES: g
+    // EFFECTS:  draws the Projectile p onto g
     private void drawProjectile(Graphics g, Projectile m) {
         try {
             cannonball = ImageIO.read(new File("data/cannonball.png"));
@@ -105,12 +104,12 @@ public class GamePanel extends JPanel {
     }
 
     // Draws the "game over" message and replay instructions
-    // modifies: g
-    // effects:  draws "game over" and replay instructions onto g
+    // MODIFIES: g
+    // EFFECTS:  draws "game over" and replay instructions onto g
     private void gameOver(Graphics g) {
         Color saved = g.getColor();
         g.setColor(new Color(0, 0, 0));
-        g.setFont(new Font("Arial", 20, 20));
+        g.setFont(new Font("Times New Roman", 20, 20));
         FontMetrics fm = g.getFontMetrics();
         centreString(OVER, g, fm, MyGame.HEIGHT / 2);
         centreString(REPLAY, g, fm, MyGame.HEIGHT / 2 + 50);
@@ -118,8 +117,8 @@ public class GamePanel extends JPanel {
     }
 
     // Centres a string on the screen
-    // modifies: g
-    // effects:  centres the string str horizontally onto g at vertical position yPos
+    // MODIFIES: g
+    // EFFECTS:  centres the string str horizontally onto g at vertical position yPos
     private void centreString(String str, Graphics g, FontMetrics fm, int ypos) {
         int width = fm.stringWidth(str);
         g.drawString(str, (MyGame.WIDTH - width) / 2, ypos);

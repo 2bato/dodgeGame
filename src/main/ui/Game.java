@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 
 import static java.awt.event.KeyEvent.VK_R;
 
+// based from space invaders
 /*
  * Represents the main window in which the game is played
  */
@@ -20,7 +21,7 @@ public class Game extends JFrame {
     private ScorePanel sp;
 
     // Constructs main window
-    // effects: sets up window in which Space Invaders game will be played
+    // EFFECTS: sets up window in which the game will be played
     public Game() {
         super("Save the Ducky");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,9 +39,7 @@ public class Game extends JFrame {
     }
 
     // Set up timer
-    // modifies: none
-    // effects:  initializes a timer that updates game each
-    //           INTERVAL milliseconds
+    // EFFECTS:  initializes a timer that updates game each INTERVAL milliseconds
     private void addTimer() {
         Timer t = new Timer(INTERVAL, ae -> {
             game.update();
@@ -52,16 +51,16 @@ public class Game extends JFrame {
     }
 
     // Centres frame on desktop
-    // modifies: this
-    // effects:  location of frame is set so frame is centred on desktop
+    // MODIFIES: this
+    // EFFECTS:  location of frame is set so frame is centred on desktop
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
     }
 
-    /*
-     * A key handler to respond to key events
-     */
+    // A key handler to respond to key events
+    // MODIFIES: this
+    // EFFECTS: pass key event to move player or restart game
     private class KeyHandler extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {

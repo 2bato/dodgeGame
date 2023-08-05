@@ -10,7 +10,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-
+// Based from Space Invader
+/*
+ * The panel in which the score is rendered.
+ */
 public class ScorePanel extends JPanel {
     private static final String SCORE_TXT = "Projectiles dodged: ";
     private static final int LBL_WIDTH = 200;
@@ -24,8 +27,8 @@ public class ScorePanel extends JPanel {
 
 
     // Constructs a score panel
-    // effects: sets the background colour and draws the initial labels;
-    //          updates this with the game whose score is to be displayed
+    // EFFECTS: sets the background colour and draws the initial labels and buttons;
+    //          updates this with the game whose score is to be displayed;
     public ScorePanel(MyGame g) {
         game = g;
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -52,23 +55,27 @@ public class ScorePanel extends JPanel {
     }
 
     // Updates the score panel
-    // modifies: this
-    // effects:  updates number of invaders shot and number of missiles
-    //           remaining to reflect current state of game
+    // MODIFIES: this
+    // EFFECTS:  updates the game score and high scores
     public void update() {
         projectilesLbl.setText(SCORE_TXT + game.getGameScore());
 
         if (game.getHighScoresString().isEmpty()) {
             highscoreLbl.setText("No High Score Yet");
         } else {
-            highscoreLbl.setText("<html> High Score:<br/>" + highScoresToString() + "<html>");
+            highscoreLbl.setText("<html> High Scores:<br/>" + highScoresToString() + "<html>");
         }
     }
 
+    // Return high scores as a string
+    // EFFECTS: return high scores as a single string with line breaks
     public String highScoresToString() {
         return String.join("<br/>", game.getHighScoresString());
     }
 
+    // Action event handler
+    // MODIFIES: game
+    // EFFECTS: call functions based on buttons clicked
     public void buttonClicked(ActionEvent e) {
         String command = e.getActionCommand();
 
