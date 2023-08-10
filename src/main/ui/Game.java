@@ -76,6 +76,8 @@ public class Game extends JFrame {
         }
     }
 
+    // A window handler to respond to window events
+    // EFFECTS: print event log
     private class WindowHandler extends WindowAdapter {
         @Override
         public void windowClosing(WindowEvent e) {
