@@ -1,11 +1,15 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.MyGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import static java.awt.event.KeyEvent.VK_R;
 
@@ -32,6 +36,7 @@ public class Game extends JFrame {
         add(gp);
         add(sp, BorderLayout.WEST);
         addKeyListener(new KeyHandler());
+        addWindowListener(new WindowHandler());
         pack();
         centreOnScreen();
         setVisible(true);
@@ -68,6 +73,16 @@ public class Game extends JFrame {
                 game.set();
             }
             game.movePlayer(e.getKeyChar());
+        }
+    }
+
+    private class WindowHandler extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            EventLog el = EventLog.getInstance();
+            for (Event next : el) {
+                System.out.println(next.toString());
+            }
         }
     }
 }

@@ -39,3 +39,25 @@ Order button to sort Xs in Y by score in Ascending order.
 and the rubber ducky which represents the player.
 - You can save the state of my application by clicking the Save button.
 - You can reload the state of my application by clicking the Load button.
+
+## Phase 4: Task 2
+- Thu Aug 10 10:12:34 PDT 2023
+- Added Score: 5 2023/08/10 10:12:34
+- Thu Aug 10 10:12:36 PDT 2023
+- Added Score: 0 2023/08/10 10:12:36
+- Thu Aug 10 10:12:41 PDT 2023
+- Added Score: 2 2023/08/10 10:12:41
+- Thu Aug 10 10:12:44 PDT 2023
+- Added Score: 0 2023/08/10 10:12:44
+- Thu Aug 10 10:12:51 PDT 2023
+- Added Score: 5 2023/08/10 10:12:51
+- Thu Aug 10 10:12:53 PDT 2023
+- Sorted Scores in Ascending Order
+- Thu Aug 10 10:12:55 PDT 2023
+- Sorted Scores in Descending Order
+- Thu Aug 10 10:12:57 PDT 2023
+- Cleared Scores
+- Thu Aug 10 10:12:59 PDT 2023
+- Added Score: 0 2023/08/10 10:12:59
+- Thu Aug 10 10:13:03 PDT 2023
+- Added Score: 0 2023/08/10 10:13:03
