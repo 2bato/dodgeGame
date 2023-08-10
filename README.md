@@ -61,3 +61,13 @@ and the rubber ducky which represents the player.
 - Added Score: 0 2023/08/10 10:12:59
 - Thu Aug 10 10:13:03 PDT 2023
 - Added Score: 0 2023/08/10 10:13:03
+
+## Phase 4: Task 3
+Looking at the UML diagram, I realized that implementing Writable
+with all the different classes that are a part of MyGame was probably
+unnecessary. To simplify the code and avoid redundancy, I would refactor
+it by only using toJson in MyGame and making a Json object with every
+field in MyGame. Something else I would like to do is add a new projectiles
+class that contains lists of projectiles instead of having a list of projectiles
+in MyGame. This would allow me to add different types of projectiles more
+easily with new classes extending the Projectile class. 
